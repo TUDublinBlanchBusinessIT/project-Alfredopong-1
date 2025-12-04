@@ -4,26 +4,24 @@ require_once 'db_connect.php';
 $successMessage = "";
 $errorMessage = "";
 
-// Handle the form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get values from the form
-    $title   = trim($_POST['title'] ?? '');
+
+    $title = trim($_POST['title'] ?? '');
     $platform = trim($_POST['platform'] ?? '');
-    $status  = $_POST['status'] ?? 'Not Started';
+    $status = $_POST['status'] ?? 'Not Started';
     $priority = $_POST['priority'] ?? 'Medium';
-    $genre   = trim($_POST['genre'] ?? '');
+    $genre = trim($_POST['genre'] ?? '');
     $target_finish_date = $_POST['target_finish_date'] ?? null;
 
-    // Basic validation
     if ($title === '' || $platform === '') {
         $errorMessage = "Please fill in at least the title and platform.";
     } else {
-        // Escape values to avoid basic SQL issues
-        $titleEsc    = $conn->real_escape_string($title);
+
+        $titleEsc = $conn->real_escape_string($title);
         $platformEsc = $conn->real_escape_string($platform);
-        $statusEsc   = $conn->real_escape_string($status);
+        $statusEsc = $conn->real_escape_string($status);
         $priorityEsc = $conn->real_escape_string($priority);
-        $genreEsc    = $conn->real_escape_string($genre);
+        $genreEsc = $conn->real_escape_string($genre);
 
         if ($target_finish_date === '') {
             $targetSql = "NULL";
@@ -33,14 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $sql = "
             INSERT INTO games (title, platform, status, priority, genre, target_finish_date)
-            VALUES (
-                '$titleEsc',
-                '$platformEsc',
-                '$statusEsc',
-                '$priorityEsc',
-                '$genreEsc',
-                $targetSql
-            )
+            VALUES ('$titleEsc', '$platformEsc', '$statusEsc', '$priorityEsc', '$genreEsc', $targetSql)
         ";
 
         if ($conn->query($sql) === true) {
@@ -98,7 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="date" name="target_finish_date"><br><br>
 
     <input type="submit" value="Add Game">
-
 </form>
 
 <p><a href="index.php">Back to Home</a></p>
