@@ -1,6 +1,8 @@
 <?php
 require_once 'db_connect.php';
 
+$platforms = $conn->query("SELECT name FROM platforms ORDER BY name");
+
 $successMessage = "";
 $errorMessage = "";
 
@@ -65,8 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label>Game Title:</label><br>
     <input type="text" name="title" required><br><br>
 
-    <label>Platform:</label><br>
-    <input type="text" name="platform" required><br><br>
+<label>Platform:</label><br>
+<select name="platform" required>
+    <?php while ($row = $platforms->fetch_assoc()): ?>
+        <option value="<?php echo $row['name']; ?>">
+            <?php echo $row['name']; ?>
+        </option>
+    <?php endwhile; ?>
+</select>
+<br><br>
 
     <label>Status:</label><br>
     <select name="status">
