@@ -15,6 +15,9 @@ require_once 'db_connect.php';
 
     <p><a href="adding_game.php">Add a New Game</a></p>
     <p><a href="view_games.php">View Games</a></p>
+    <p><a href="recommended_game.php">Recommended Game</a></p>
+
+    
 
 </body>
 </html>
