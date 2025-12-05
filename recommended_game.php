@@ -4,12 +4,13 @@ require_once 'db_connect.php';
 $sql = "
     SELECT title, platform, priority, genre
     FROM games
-    ORDER BY 
+    ORDER BY
         CASE priority
             WHEN 'High' THEN 3
             WHEN 'Medium' THEN 2
             WHEN 'Low' THEN 1
-        END DESC
+        END DESC,
+        created_at ASC
     LIMIT 1
 ";
 
@@ -35,6 +36,7 @@ $game = $result->fetch_assoc();
     <p>No games available.</p>
 <?php endif; ?>
 
+<br>
 <a href="index.php">Back to Home</a>
 
 </body>
