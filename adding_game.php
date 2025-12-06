@@ -81,7 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <select name="status">
         <option value="Not Started">Not Started</option>
         <option value="Playing">Playing</option>
-        <option value="Completed">Completed</option>
     </select><br><br>
 
     <label>Priority:</label><br>
