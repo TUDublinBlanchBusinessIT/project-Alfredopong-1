@@ -30,11 +30,18 @@ $result = $conn->query($sql);
         <th>Priority</th>
         <th>Genre</th>
         <th>Target Finish Date</th>
+        <th>Days Left</th>
         <th>Added On</th>
     </tr>
 
     <?php if ($result && $result->num_rows > 0): ?>
         <?php while ($row = $result->fetch_assoc()): ?>
+            <?php
+                $today = new DateTime();
+                $targetDate = new DateTime($row['target_finish_date']);
+                $interval = $today->diff($targetDate);
+                $daysLeft = $interval->days;
+            ?>
             <tr>
                 <td><?php echo htmlspecialchars($row['title']); ?></td>
                 <td><?php echo htmlspecialchars($row['platform']); ?></td>
@@ -42,12 +49,13 @@ $result = $conn->query($sql);
                 <td><?php echo htmlspecialchars($row['priority']); ?></td>
                 <td><?php echo htmlspecialchars($row['genre']); ?></td>
                 <td><?php echo htmlspecialchars($row['target_finish_date']); ?></td>
+                <td><?php echo $daysLeft . " days"; ?></td>
                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
             </tr>
         <?php endwhile; ?>
     <?php else: ?>
         <tr>
-            <td colspan="7">No games in your backlog yet.</td>
+            <td colspan="8">No games in your backlog yet.</td>
         </tr>
     <?php endif; ?>
 </table>
