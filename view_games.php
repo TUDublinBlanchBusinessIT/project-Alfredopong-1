@@ -32,6 +32,8 @@ $result = $conn->query($sql);
         <th>Target Finish Date</th>
         <th>Days Left</th>
         <th>Added On</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
 
     <?php if ($result && $result->num_rows > 0): ?>
@@ -51,11 +53,13 @@ $result = $conn->query($sql);
                 <td><?php echo htmlspecialchars($row['target_finish_date']); ?></td>
                 <td><?php echo $daysLeft . " days"; ?></td>
                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
+                <td><a href="edit_game.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+                <td><a href="delete_game.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this game?');">Delete</a></td>
             </tr>
         <?php endwhile; ?>
     <?php else: ?>
         <tr>
-            <td colspan="8">No games in your backlog yet.</td>
+            <td colspan="10">No games in your backlog yet.</td>
         </tr>
     <?php endif; ?>
 </table>
