@@ -84,11 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </select><br><br>
 
     <label>Priority:</label><br>
-    <select name="priority">
-        <option value="High">High</option>
-        <option value="Medium" selected>Medium</option>
-        <option value="Low">Low</option>
-    </select><br><br>
+    <input type="radio" name="priority" value="High"> High<br>
+    <input type="radio" name="priority" value="Medium" checked> Medium<br>
+    <input type="radio" name="priority" value="Low"> Low<br><br>
+
 
     <label>Genre:</label><br>
     <input type="text" name="genre"><br><br>
